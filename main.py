@@ -4,6 +4,8 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 from sklearn.preprocessing import LabelEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder
 
 
 print(tf.__version__)
@@ -15,5 +17,9 @@ y = dataset.iloc[:, -1].values
 
 le = LabelEncoder()
 X[:, 2] = le.fit_transform(X[:, 2])
+
+ct = ColumnTransformer(transformers=[('encoder', OneHotEncoder(), [1])], remainder='passthrough')
+X = np.array(ct.fit_transform(X))
+
 
 print(X)
