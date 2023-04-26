@@ -28,4 +28,18 @@ sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
+#Creating a new instance of an empty ANN (Artificial Neural Network)
+ann = tf.keras.models.Sequential()
+#We are using Rectifier activation function.
+ann.add(tf.keras.layers.Dense(units=6, activation='relu'))
+ann.add(tf.keras.layers.Dense(units=6, activation='relu'))
+ann.add(tf.keras.layers.Dense(units=1, activation='sigmoid'))
+
+#Compiling the ANN
+ann.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
+#Ok now it's time to train the ANN on the training set
+ann.fit(X_train, y_train, batch_size=32, epochs=100)
+
+
 print(X)
+print(ann.predict(sc.transform([[1, 0, 0, 600, 1, 40, 3, 60000, 2, 1, 1, 50000]])) > 0.5)
