@@ -40,7 +40,6 @@ ann.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accura
 #Ok now it's time to train the ANN on the training set
 ann.fit(X_train, y_train, batch_size=32, epochs=100)
 
-
 print(X)
 print(ann.predict(sc.transform([[1, 0, 0, 600, 1, 40, 3, 60000, 2, 1, 1, 50000]])) > 0.5)
 print(ann.predict(X_train)) # Use X_train instead of y_train
