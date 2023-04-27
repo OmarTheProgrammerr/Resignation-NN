@@ -1,5 +1,5 @@
-<h1>This project trains a model on dummy bank data to predict whether a customer will leave the bank or not.
-</h1>
+This project trains a model on dummy bank data to predict whether a customer will leave the bank or not.
+
 Follow these steps to run the code:
 
 1. Clone the repository.
