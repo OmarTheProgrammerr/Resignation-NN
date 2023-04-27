@@ -35,7 +35,8 @@ ann.add(tf.keras.layers.Dense(units=6, activation='relu'))
 ann.add(tf.keras.layers.Dense(units=6, activation='relu'))
 ann.add(tf.keras.layers.Dense(units=1, activation='sigmoid'))
 
-#Compiling the ANN
+#Compiling the ANN. The loss here represents the cost where the "binary_crossentropy represents a common cost function."
+#he optimizer's purpose is to make the model's predictions as accurate as possible by iteratively adjusting the model's parameters.
 ann.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 #Ok now it's time to train the ANN on the training set
 ann.fit(X_train, y_train, batch_size=32, epochs=100)
