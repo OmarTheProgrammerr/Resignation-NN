@@ -8,6 +8,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import confusion_matrix, accuracy_score
 
 
 print(tf.__version__)
@@ -39,13 +40,20 @@ ann.add(tf.keras.layers.Dense(units=1, activation='sigmoid'))
 #he optimizer's purpose is to make the model's predictions as accurate as possible by iteratively adjusting the model's parameters.
 ann.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 #Ok now it's time to train the ANN on the training set
-ann.fit(X_train, y_train, batch_size=32, epochs=100)
+ann.fit(X_train, y_train, batch_size=32, epochs=500)
 
 print(X)
+# 1, 0, 0 here represents France
 print(ann.predict(sc.transform([[1, 0, 0, 600, 1, 40, 3, 60000, 2, 1, 1, 50000]])) > 0.5)
-print(ann.predict(X_train)) # Use X_train instead of y_train
-print(ann.predict(X_train) > 0.5) # Use ann.predict(X_train) instead of ann.preidct(y_train > 0.5)
+print(ann.predict(X_train)) 
+print(ann.predict(X_train) > 0.5) 
 
+#This is to compare and see the actual results and what the model predicted -> 0 is going to stay and 1 is going to leave.
 y_pred = ann.predict(X_test)
 y_pred = (y_pred > 0.5)
 print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
+
+#printing how many cases did the model guess right.
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+accuracy_score(y_test, y_pred)
